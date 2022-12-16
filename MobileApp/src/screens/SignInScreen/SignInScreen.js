@@ -1,10 +1,14 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native'
 import React from 'react'
+import CustomInput from '../../components/CustomInput'
 
 const SignInScreen = () => {
+	const {height} = useWindowDimensions()
+	
 	return (
 		<View style={styles.root}>
-			<Text style={styles.logo}>สร้างบัญชี</Text>
+			<Text style={styles.logo}>SignInScreen</Text>
+			<CustomInput />
 		</View>
 	)
 }
@@ -14,7 +18,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	logo: {
-		fontSize: 70,
+		fontSize: 50,
 		padding: 20,
 		color: '#ffffff',
 		fontWeight: 'bold',
