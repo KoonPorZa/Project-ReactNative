@@ -7,12 +7,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 const SignInScreen = () => {
 
-	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	const {height} = useWindowDimensions()
 
-	const onSignInPressed = () => {
+	const onSignInPress = () => {
 		console.warn("Sign in")
 	}
 
@@ -20,13 +20,17 @@ const SignInScreen = () => {
 		console.warn("Forgot Password Pressed")
 	}
 
+	const onSignUpPress =() => {
+		console.warn("onSignUpPress");
+	}
+
 	return (
 		<View style={styles.root}>
 			<Text style={styles.header}>Sign In</Text>
 			<CustomInput
-				placeholder="Username"
-				value={username}
-				setValue={setUsername}
+				placeholder="Email"
+				value={email}
+				setValue={setEmail}
 			/>
 			<CustomInput
 				placeholder="Password" 
@@ -34,9 +38,21 @@ const SignInScreen = () => {
 				setValue={setPassword} 
 				secureTextEntry
 			/>
+			<CustomButton
+				text="Sign In" 
+				onPress={onSignInPress} 
+			/>
+			<CustomButton 
+				text="Forgot Password?" 
+				onPress={onForgotPasswordPressed} 
+				type="TERTIARY" 
+			/>
+			<CustomButton 
+				text="Don't have an account? Create one" 
+				onPress={onSignUpPress} 
+				type="TERTIARY" 
+			/>
 
-			<CustomButton text="Sign In" onPress={onSignInPressed} />
-			<CustomButton text="Forgot Password?" onPress={onForgotPasswordPressed} type="TERTIARY" />
 		</View>
 	)
 }
