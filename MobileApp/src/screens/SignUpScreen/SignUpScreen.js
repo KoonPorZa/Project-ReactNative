@@ -1,23 +1,33 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import React, {useState} from 'react'
-import CustomInput from '../../components/CustomInput'
+import React, { useState } from 'react'
+import CustomInput from '../../components/CustomInput/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
 import { auth } from '../../../firebase'
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [passwordRepeat, setPasswordRepeat] = useState('')
 
 	const onSignInPress = () => {
-		console.warn("Sign in")
+		navigation.navigate('Login')
 	}
 
 	const onRegisterPress =() => {
-		console.warn("onRegisterPress");
+		// navigation.navigate('Information')
+		// alert("Register")
 	}
+
+	// const handleSignUp = () => {
+	// 	auth.createUserWithEmailAndPassword(email, password)
+	// 	auth.then(userCredentials => {
+	// 			const user = userCredentials.user
+	// 			console.log(user.email);
+	// 		})
+	// 	auth.catch(error => alert(error.message))
+	// }
 
 	return (
 		<View style={styles.root}>
@@ -41,13 +51,18 @@ const SignUpScreen = () => {
 			/>
 			<CustomButton
 				text="Register" 
-				onPress={onRegisterPress} 
+				// onPress={handleSignUp} 
+				onPress={onRegisterPress}
 			/>
-			<CustomButton 
-				text="Have an account? Sign in" 
-				onPress={onSignInPress} 
-				type="TERTIARY" 
-			/>
+			<Text 
+				style={styles.text} >
+				Have an account? {''}
+				<Text 
+					style={styles.link}
+					onPress={onSignInPress} >
+					Sign in
+				</Text>
+			</Text>
 
 
 		</View>
@@ -63,6 +78,14 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		fontWeight: 'bold',
 		margin: 10,
+	},
+	text: {
+		padding: 10,
+		fontWeight: 'bold',
+        color: 'gray',
+	},
+	link: {
+		color: '#3b71f3'
 	}
 })
 

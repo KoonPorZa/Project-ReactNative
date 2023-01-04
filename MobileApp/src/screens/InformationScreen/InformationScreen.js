@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, {useState} from 'react'
-import CustomInput from '../../components/CustomInput'
+import CustomInput from '../../components/CustomInput/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
 import { auth } from '../../../firebase'
 import { onAuthStateChanged } from 'firebase/auth';

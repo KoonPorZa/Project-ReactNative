@@ -2,13 +2,15 @@ import { View, Text, Image, StyleSheet, useWindowDimensions, KeyboardAvoidingVie
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
-import { auth, firebaseConfig } from '../../../firebase'
-import { onAuthStateChanged } from 'firebase/auth';
+// import { auth, firebaseConfig } from '../../../firebase'
+import { onAuthStateChanged, UserCredential } from 'firebase/auth'
 import { firebase } from '../../../firebase'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { initializeApp } from 'firebase/app';
 
-const SignInScreen = ({ navigation }) => {
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { initializeApp } from 'firebase/app'
+import { firebaseConfig } from '../../../firebase'
+
+const LoginTest = ({ navigation }) => {
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -16,31 +18,31 @@ const SignInScreen = ({ navigation }) => {
 	const app = initializeApp(firebaseConfig)
 	const auth = getAuth(app)
 
-	const onSignInPress = async (email, password) => {
-		alert('Sign In Pressed')
+	const onRegisterPress =() => {
+		createUserWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			const user = userCredential.user
+			alert("Register Complete")
+		})
+		.catch(error => {
+			alert(error.message)
+		})
 	}
-
-	const onForgotPasswordPressed = () => {
-		alert('Forgot Password Pressed')
-	}
-
-	const onSignUpPress =() => {
-		navigation.navigate('Register')
-	}
-
-	loginUser = async (email, password) => {
-		try {
-			await firebase.auth().signInWithEmailAndPassword(email, password)
-			navigation.navigate('Course')
-		} catch (error) {
-			alert(error.message + " <> " + email + password) 
-		}
+	const onLoginPress = () => {
+		signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			const user = userCredential.user
+			alert("Login Complete")
+		})
+		.catch(error => {
+			alert(error.message)
+		})
 	}
 
 	return (
 		<KeyboardAvoidingView>
 			<View style={styles.root}>
-				<Text style={styles.header}>Sign In</Text>
+				<Text style={styles.header}>Login Test</Text>
 				<CustomInput
 					placeholder="Email"
 					value={email}
@@ -53,29 +55,17 @@ const SignInScreen = ({ navigation }) => {
 					secureTextEntry
 				/>
 				<CustomButton
-					text="Sign In" 
-					onPress={onSignInPress} 
+					text="Login" 
+					onPress={onLoginPress} 
 					// onPress={ () => loginUser(email, password) }
 					type="PRIMARY"
 				/>
-				<Text 
-					style={styles.text} >
-					Forgot Password? {''}
-					<Text 
-						style={styles.link}
-						onPress={onForgotPasswordPressed} >
-						Click
-					</Text>
-				</Text>
-				<Text 
-					style={styles.text} >
-					Don't have an account? {''}
-					<Text 
-						style={styles.link}
-						onPress={onSignUpPress} >
-						Create one
-					</Text>
-				</Text>
+				<CustomButton
+					text="Register" 
+					onPress={onRegisterPress} 
+					// onPress={ () => loginUser(email, password) }
+					type="PRIMARY"
+				/>
 
 			</View>
 		</KeyboardAvoidingView>
@@ -102,4 +92,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default SignInScreen
+export default LoginTest
