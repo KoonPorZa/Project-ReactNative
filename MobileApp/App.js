@@ -17,16 +17,10 @@ import Ionicons from 'react-native-vector-icons'
 
 import CustomTabNavigator from './src/components/CustomTabNavigator/CustomTabNavigator';
 
-import SplashScreen from 'react-native-splash-screen'
-
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const App = () => {
-
-	useEffect(() => {
-		SplashScreen.hide()
-	  }, [])
 
     return (
 		<NavigationContainer>
