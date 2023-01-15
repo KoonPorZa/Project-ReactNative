@@ -16,7 +16,7 @@ const SignUpScreen = ({ navigation }) => {
 	}
 
 	const onRegisterPress =() => {
-		// navigation.navigate('Information')
+		navigation.navigate('Information')
 		// alert("Register")
 	}
 

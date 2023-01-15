@@ -16,8 +16,17 @@ const SignInScreen = ({ navigation }) => {
 	const app = initializeApp(firebaseConfig)
 	const auth = getAuth(app)
 
-	const onSignInPress = async (email, password) => {
-		alert('Sign In Pressed')
+	const onSignInPress = () => {
+		// alert('Sign In Pressed')
+		signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			const user = userCredential.user
+			// alert("Login Complete")
+			navigation.navigate('Course')
+		})
+		.catch(error => {
+			alert(error.message)
+		})
 	}
 
 	const onForgotPasswordPressed = () => {
@@ -28,14 +37,14 @@ const SignInScreen = ({ navigation }) => {
 		navigation.navigate('Register')
 	}
 
-	loginUser = async (email, password) => {
-		try {
-			await firebase.auth().signInWithEmailAndPassword(email, password)
-			navigation.navigate('Course')
-		} catch (error) {
-			alert(error.message + " <> " + email + password) 
-		}
-	}
+	// loginUser = async (email, password) => {
+	// 	try {
+	// 		await firebase.auth().signInWithEmailAndPassword(email, password)
+	// 		navigation.navigate('Course')
+	// 	} catch (error) {
+	// 		alert(error.message + " <> " + email + password) 
+	// 	}
+	// }
 
 	return (
 		<KeyboardAvoidingView>

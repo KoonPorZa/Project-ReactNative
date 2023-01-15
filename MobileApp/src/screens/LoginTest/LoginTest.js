@@ -12,6 +12,7 @@ import { firebaseConfig } from '../../../firebase'
 
 const LoginTest = ({ navigation }) => {
 
+	// Login 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 

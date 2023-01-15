@@ -5,7 +5,7 @@ import CustomButton from '../../components/CustomButton/CustomButton'
 import { auth } from '../../../firebase'
 import { onAuthStateChanged } from 'firebase/auth';
 
-const InformationScreen = () => {
+const InformationScreen = ({ navigation }) => {
 
 	const [imgprofile, setImgprofile] = useState('')
 	const [firstname, setFirstname] = useState('')
@@ -20,13 +20,8 @@ const InformationScreen = () => {
 	const [agency, setAgency] = useState('')
 	const [status, setStatus] = useState('')
 
-
-	const onSignInPress = () => {
-		console.warn("Sign in")
-	}
-
 	const onRegisterPress =() => {
-		console.warn("onRegisterPress");
+		navigation.navigate('Course')
 	}
 
 	return (
@@ -94,7 +89,7 @@ const InformationScreen = () => {
 					setValue={setStatus} 
 				/>
 				<CustomButton
-					text="Register" 
+					text="Submit" 
 					onPress={onRegisterPress} 
 				/>
 

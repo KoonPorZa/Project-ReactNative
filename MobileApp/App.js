@@ -1,32 +1,43 @@
-import * as React from 'react';
+import React, { useEffect } from 'react'
 import { SafeAreaView, StyleSheet, useState } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+// Screens
 import SignInScreen from './src/screens/SignInScreen/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen/SignUpScreen'
 import InformationScreen from './src/screens/InformationScreen'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 import CourseScreen from './src/screens/CourseScreen'
-import LoginTest from './src/screens/LoginTest'
 
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth'
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from 'react-native-vector-icons'
+
+import CustomTabNavigator from './src/components/CustomTabNavigator/CustomTabNavigator';
+
+import SplashScreen from 'react-native-splash-screen'
 
 const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 const App = () => {
 
-    return (
+	useEffect(() => {
+		SplashScreen.hide()
+	  }, [])
 
-        <NavigationContainer>
+    return (
+		<NavigationContainer>
 			<Stack.Navigator>
-				<Stack.Screen name="Home" component={HomeScreen} />
+				{/* <Stack.Screen options={{ headerShown: false }} name="CustomTabNavigator" component={CustomTabNavigator} /> */}
+				<Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Login" component={SignInScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Register" component={SignUpScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Information" component={InformationScreen} />
-				<Stack.Screen name="Course" component={CourseScreen} />
-                {/* <Stack.Screen name="Login" component={LoginTest} /> */}
-            </Stack.Navigator>
+				<Stack.Screen options={{ headerShown: false }} name="Course" component={CourseScreen} />
+			</Stack.Navigator>
 		</NavigationContainer>
     );
 }
