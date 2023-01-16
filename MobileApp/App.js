@@ -7,6 +7,7 @@ import SignUpScreen from './src/screens/SignUpScreen/SignUpScreen'
 import InformationScreen from './src/screens/InformationScreen'
 import HomeScreen from './src/screens/HomeScreen/HomeScreen'
 import CourseScreen from './src/screens/CourseScreen'
+import OnBoardingScreen from './src/components/OnBoarding/OnBoardingScreen';
 
 import { onAuthStateChanged } from 'firebase/auth'
 
@@ -26,6 +27,7 @@ const App = () => {
 		<NavigationContainer>
 			<Stack.Navigator>
 				{/* <Stack.Screen options={{ headerShown: false }} name="CustomTabNavigator" component={CustomTabNavigator} /> */}
+				<Stack.Screen options={{ headerShown:false }} name="OnBoarding" component={OnBoardingScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Login" component={SignInScreen} />
 				<Stack.Screen options={{ headerShown: false }} name="Register" component={SignUpScreen} />
